@@ -9,7 +9,19 @@
 import XCTest
 @testable import AstroImaging
 
+extension NSImage.Name {
+     static let stars1 = NSImage.Name("stars1")
+     static let red = NSImage.Name("red")
+     static let green = NSImage.Name("green")
+     static let blue = NSImage.Name("blue")
+     static let black = NSImage.Name("black")
+     static let white = NSImage.Name("white")
+     static let grey = NSImage.Name("grey")
+}
+
 class AstroImagingTests: XCTestCase {
+    
+    let appBundle = Bundle(for: AstroImagingTests.self)
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,8 +32,13 @@ class AstroImagingTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let image = appBundle.image(forResource: .stars1)
+        XCTAssertNotNil(image)
+        if image != nil {
+            let asImages = ASImage.extractChannels(from: image!)
+            XCTAssertNotNil(asImages)
+            //let nsImage = asImage?.cgImage
+        }
     }
 
     func testPerformanceExample() {
